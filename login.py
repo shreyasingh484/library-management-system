@@ -1,0 +1,16 @@
+import sqlite3
+
+def login(username, password):
+    conn = sqlite3.connect("library.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT * FROM users WHERE username=? AND password=?",
+        (username, password)
+    )
+
+    user = cursor.fetchone()
+
+    conn.close()
+
+    return user is not None
